@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.rxjava)
     testImplementation(libs.junit)
     testImplementation(libs.kluent)
     testImplementation(libs.mockk)
