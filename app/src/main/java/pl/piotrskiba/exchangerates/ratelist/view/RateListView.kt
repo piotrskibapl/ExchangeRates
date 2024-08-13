@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import pl.piotrskiba.exchangerates.R
+import pl.piotrskiba.exchangerates.base.view.LoadingIndicator
 import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.Table
@@ -37,13 +37,12 @@ fun RateListView(
     ExchangeRatesTheme {
         Column(modifier = Modifier.fillMaxSize()) {
             TopAppBar(title = { Text(stringResource(R.string.title_activity_main)) })
-            if (state == ViewModelState.LOADING) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .padding(top = 80.dp)
-                        .align(Alignment.CenterHorizontally)
-                )
-            } else {
+            LoadingIndicator(
+                modifier = Modifier
+                    .padding(top = 80.dp)
+                    .align(Alignment.CenterHorizontally),
+                state = state
+            ) {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = rates) {
                         RateListElement(rate = it, onClick = onClick)

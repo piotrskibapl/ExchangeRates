@@ -14,7 +14,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
-import java.util.Locale
 import javax.inject.Singleton
 
 @Module
@@ -43,10 +42,13 @@ interface CurrencyModule {
 
         @Provides
         @Singleton
-        fun provideCurrencyRepository(currencyApi: CurrencyApiService): CurrencyRepository =
+        fun provideCurrencyRepository(
+            currencyApi: CurrencyApiService,
+            dateFormat: SimpleDateFormat,
+        ): CurrencyRepository =
             CurrencyRepositoryImpl(
                 currencyApi = currencyApi,
-                dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT),
+                dateFormat = dateFormat,
             )
     }
 }

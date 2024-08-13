@@ -23,6 +23,13 @@ class RateDetailsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         rateDetailsViewModel.rate = intent.serializable(Arg.rate)!!
-        setContent { RateDetailsView(rateDetailsViewModel.rate) }
+        setContent {
+            RateDetailsView(
+                rateDetailsViewModel.rate,
+                rateDetailsViewModel.historicalRateList,
+                rateDetailsViewModel.state,
+            )
+        }
+        rateDetailsViewModel.loadRateDetails()
     }
 }
