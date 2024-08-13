@@ -16,5 +16,7 @@ class GetHistoricalCurrencyRatesUseCase @Inject constructor(
             code = code,
             startDate = dateProvider.getHistoricalDate(14),
             endDate = dateProvider.getCurrentDate(),
-        )
+        ).map { ratesTable ->
+            ratesTable.copy(rates = ratesTable.rates.sortedByDescending { it.effectiveDate })
+        }
 }
