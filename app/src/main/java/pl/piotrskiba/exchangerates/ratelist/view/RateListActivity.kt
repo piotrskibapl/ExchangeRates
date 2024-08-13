@@ -16,7 +16,7 @@ class RateListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent { RateListView(rateListViewModel.rateList, rateListViewModel.state) }
+        setContent { RateListView(rateListViewModel.rateList, rateListViewModel.state, rateListViewModel::onRateClick) }
         rateListViewModel.loadRateList()
     }
 }

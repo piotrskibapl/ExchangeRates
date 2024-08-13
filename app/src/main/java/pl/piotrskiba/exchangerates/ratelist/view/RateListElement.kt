@@ -1,5 +1,6 @@
 package pl.piotrskiba.exchangerates.ratelist.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,10 +18,14 @@ import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.Table
 
 @Composable
-fun RateListElement(rate: Rate) {
-    Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+fun RateListElement(rate: Rate, onClick: (Rate) -> Unit) {
+    Column(modifier = Modifier
+        .padding(horizontal = 8.dp)
+        .clickable { onClick(rate) }) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Column(Modifier.weight(1f)) {
@@ -47,11 +52,12 @@ fun RateListElement(rate: Rate) {
 @Composable
 fun RateListElementPreview() {
     RateListElement(
-        Rate(
+        rate = Rate(
             table = Table.A,
             currency = "Polish Zloty",
             code = "PLN",
             mid = "0.123456789",
-        )
+        ),
+        onClick = {},
     )
 }

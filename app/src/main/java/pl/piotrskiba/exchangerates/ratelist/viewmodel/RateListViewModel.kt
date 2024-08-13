@@ -50,4 +50,7 @@ class RateListViewModel @Inject constructor(
         super.onCleared()
         disposables.clear()
     }
+
+    fun onRateClick(rate: Rate) {
+    }
 }

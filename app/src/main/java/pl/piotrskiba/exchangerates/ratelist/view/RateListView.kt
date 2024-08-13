@@ -27,7 +27,11 @@ import pl.piotrskiba.exchangerates.ui.theme.ExchangeRatesTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RateListView(ratesStateFlow: StateFlow<List<Rate>>, stateStateFlow: StateFlow<ViewModelState>) {
+fun RateListView(
+    ratesStateFlow: StateFlow<List<Rate>>,
+    stateStateFlow: StateFlow<ViewModelState>,
+    onClick: (Rate) -> Unit,
+) {
     val rates by ratesStateFlow.collectAsState()
     val state by stateStateFlow.collectAsState()
     ExchangeRatesTheme {
@@ -42,7 +46,7 @@ fun RateListView(ratesStateFlow: StateFlow<List<Rate>>, stateStateFlow: StateFlo
             } else {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = rates) {
-                        RateListElement(it)
+                        RateListElement(rate = it, onClick = onClick)
                     }
                 }
             }
@@ -62,6 +66,7 @@ fun RateListViewPreview() {
                 Rate(table = Table.A, currency = "Lao kip", code = "LAK", mid = "0.123456789"),
             )
         ),
-        stateStateFlow = MutableStateFlow(ViewModelState.LOADED)
+        stateStateFlow = MutableStateFlow(ViewModelState.LOADED),
+        onClick = {}
     )
 }
