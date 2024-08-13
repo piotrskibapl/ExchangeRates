@@ -38,6 +38,7 @@ retrofit-adapter-rxjava = { group = "com.squareup.retrofit2", name = "adapter-rx
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
 rxjava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjava" }
+inject = { group = "javax.inject", name = "javax.inject", version.strictly = "1" }
 kluent = { group = "org.amshove.kluent", name = "kluent-android", version.ref = "kluent" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
