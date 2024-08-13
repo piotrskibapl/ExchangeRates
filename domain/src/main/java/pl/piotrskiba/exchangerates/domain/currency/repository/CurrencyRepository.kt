@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Single
 import pl.piotrskiba.exchangerates.domain.currency.model.HistoricalRateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
-import java.time.LocalDate
+import java.util.Date
 
 interface CurrencyRepository {
 
@@ -13,7 +13,7 @@ interface CurrencyRepository {
     fun getHistoricalRateTable(
         table: TableModel,
         code: String,
-        startDate: LocalDate,
-        endDate: LocalDate,
+        startDate: Date,
+        endDate: Date,
     ): Single<HistoricalRateTableModel>
 }

@@ -17,7 +17,7 @@ import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.toRemote
 import java.text.SimpleDateFormat
-import java.time.LocalDate
+import java.util.Date
 
 class CurrencyRepositoryImplTest {
 
@@ -61,8 +61,8 @@ class CurrencyRepositoryImplTest {
             every { toRemote() } returns "A"
         }
         val code = "PLN"
-        val startDate: LocalDate = mockk()
-        val endDate: LocalDate = mockk()
+        val startDate: Date = mockk()
+        val endDate: Date = mockk()
         val historicalRateTableModel: HistoricalRateTableModel = mockk()
         val historicalRateTableRemote: HistoricalRateTableRemote = mockk {
             every { toDomain() } returns historicalRateTableModel

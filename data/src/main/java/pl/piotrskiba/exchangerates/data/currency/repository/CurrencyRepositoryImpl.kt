@@ -9,7 +9,7 @@ import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.toRemote
 import pl.piotrskiba.exchangerates.domain.currency.repository.CurrencyRepository
 import java.text.SimpleDateFormat
-import java.time.LocalDate
+import java.util.Date
 
 class CurrencyRepositoryImpl(
     private val currencyApi: CurrencyApiService,
@@ -24,8 +24,8 @@ class CurrencyRepositoryImpl(
     override fun getHistoricalRateTable(
         table: TableModel,
         code: String,
-        startDate: LocalDate,
-        endDate: LocalDate,
+        startDate: Date,
+        endDate: Date,
     ): Single<HistoricalRateTableModel> =
         currencyApi
             .getHistoricalRateTable(
