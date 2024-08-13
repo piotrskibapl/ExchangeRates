@@ -34,5 +34,5 @@ class CurrencyRepositoryImpl(
                 startDate = dateFormat.format(startDate),
                 endDate = dateFormat.format(endDate),
             )
-            .map { it.toDomain() }
+            .map { it.toDomain(dateFormat) }
 }

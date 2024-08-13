@@ -65,7 +65,7 @@ class CurrencyRepositoryImplTest {
         val endDate: Date = mockk()
         val historicalRateTableModel: HistoricalRateTableModel = mockk()
         val historicalRateTableRemote: HistoricalRateTableRemote = mockk {
-            every { toDomain() } returns historicalRateTableModel
+            every { toDomain(dateFormat) } returns historicalRateTableModel
         }
         every { dateFormat.format(startDate) } returns "2020-01-01"
         every { dateFormat.format(endDate) } returns "2020-01-02"

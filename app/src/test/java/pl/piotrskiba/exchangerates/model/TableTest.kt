@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
 import pl.piotrskiba.exchangerates.ratelist.model.Table
+import pl.piotrskiba.exchangerates.ratelist.model.toDomain
 import pl.piotrskiba.exchangerates.ratelist.model.toUi
 
 class TableTest {
@@ -23,5 +24,11 @@ class TableTest {
     @MethodSource("parameters")
     fun `SHOULD map domain object to ui`(domainModel: TableModel, uiModel: Table) {
         domainModel.toUi() shouldBeEqualTo uiModel
+    }
+
+    @ParameterizedTest
+    @MethodSource("parameters")
+    fun `SHOULD map ui object to domain`(domainModel: TableModel, uiModel: Table) {
+        uiModel.toDomain() shouldBeEqualTo domainModel
     }
 }
