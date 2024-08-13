@@ -1,6 +1,8 @@
 package pl.piotrskiba.exchangerates.viewmodel
 
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.verify
@@ -15,6 +17,7 @@ import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRatesUseCase
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.toRates
+import pl.piotrskiba.exchangerates.ratelist.nav.RateListNavigator
 import pl.piotrskiba.exchangerates.ratelist.viewmodel.RateListViewModel
 
 class RateListViewModelTest {
@@ -73,5 +76,18 @@ class RateListViewModelTest {
         tested.loadRateList()
 
         verify(exactly = 1) { getCurrencyRatesUseCase.execute() }
+    }
+
+    @Test
+    fun `SHOULD navigate to details WHEN onRateClick called`() {
+        val rate: Rate = mockk()
+        val navigator: RateListNavigator = mockk {
+            every { navigateToCurrencyDetails(rate) } just Runs
+        }
+        tested.navigator = navigator
+
+        tested.onRateClick(rate)
+
+        verify { navigator.navigateToCurrencyDetails(rate) }
     }
 }

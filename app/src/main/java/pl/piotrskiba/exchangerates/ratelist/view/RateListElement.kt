@@ -19,11 +19,11 @@ import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.Table
 
 @Composable
-fun RateListElement(rate: Rate, onClick: (Rate) -> Unit) {
+fun RateListElement(rate: Rate, onClick: ((Rate) -> Unit)?) {
     Surface {
         Column(modifier = Modifier
             .padding(horizontal = 8.dp)
-            .clickable { onClick(rate) }) {
+            .let { modifier -> onClick?.let { modifier.clickable { it(rate) } } ?: modifier }) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

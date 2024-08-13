@@ -3,13 +3,14 @@ package pl.piotrskiba.exchangerates.ratelist.model
 import pl.piotrskiba.exchangerates.domain.currency.model.RateModel
 import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
+import java.io.Serializable
 
 data class Rate(
     val table: Table,
     val currency: String,
     val code: String,
     val mid: String,
-)
+) : Serializable
 
 fun List<RateTableModel>.toRates() =
     map { it.toRates() }.flatten()

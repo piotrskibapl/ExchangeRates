@@ -13,6 +13,11 @@
         android:theme="@style/Theme.ExchangeRates"
         tools:targetApi="31">
         <activity
+            android:name=".ratedetails.view.RateDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_rate_details"
+            android:theme="@style/Theme.ExchangeRates" />
+        <activity
             android:name=".ratelist.view.RateListActivity"
             android:exported="true"
             android:label="@string/title_activity_main"

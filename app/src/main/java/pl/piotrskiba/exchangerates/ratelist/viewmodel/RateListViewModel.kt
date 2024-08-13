@@ -11,6 +11,7 @@ import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
 import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRatesUseCase
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.toRates
+import pl.piotrskiba.exchangerates.ratelist.nav.RateListNavigator
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +25,7 @@ class RateListViewModel @Inject constructor(
     private val _state: MutableStateFlow<ViewModelState> = MutableStateFlow(ViewModelState.NOT_INITIALIZED)
     val rateList: StateFlow<List<Rate>> = _rateList.asStateFlow()
     val state: StateFlow<ViewModelState> = _state.asStateFlow()
+    lateinit var navigator: RateListNavigator
 
     fun loadRateList() {
         if (_state.value == ViewModelState.NOT_INITIALIZED) {
@@ -52,5 +54,6 @@ class RateListViewModel @Inject constructor(
     }
 
     fun onRateClick(rate: Rate) {
+        navigator.navigateToCurrencyDetails(rate)
     }
 }
