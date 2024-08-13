@@ -24,4 +24,10 @@ dependencies {
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
     testImplementation(libs.junit)
+    testImplementation(libs.kluent)
+    testImplementation(libs.mockk)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

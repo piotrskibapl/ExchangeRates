@@ -52,11 +52,18 @@ dependencies {
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
     testImplementation(libs.junit)
+    testImplementation(libs.kluent)
+    testImplementation(libs.mockk)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 
 kapt {
     correctErrorTypes = true
