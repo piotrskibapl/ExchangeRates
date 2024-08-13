@@ -41,7 +41,7 @@ fun RateListElement(rate: Rate, onClick: ((Rate) -> Unit)?) {
                     )
                 }
                 Text(
-                    text = rate.mid,
+                    text = rate.midText,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
@@ -59,7 +59,7 @@ fun RateListElementPreview() {
             table = Table.A,
             currency = "Polish Zloty",
             code = "PLN",
-            mid = "0.123456789",
+            mid = 0.123456789,
         ),
         onClick = {},
     )

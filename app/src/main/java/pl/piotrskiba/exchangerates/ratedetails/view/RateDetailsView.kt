@@ -48,7 +48,7 @@ fun RateDetailsView(
             ) {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = historicalRates) {
-                        HistoricalRateListElement(historicalRate = it)
+                        HistoricalRateListElement(historicalRate = it, referenceRateMid = rate.mid)
                     }
                 }
             }
@@ -64,15 +64,15 @@ fun RateDetailsViewPreview() {
             table = Table.A,
             currency = "Polish Zloty",
             code = "PLN",
-            mid = "1.23456789",
+            mid = 1.23456789,
         ),
         historicalRatesStateFlow = MutableStateFlow(
             listOf(
-                HistoricalRate(effectiveDate = "2020-01-01", mid = "0.123"),
-                HistoricalRate(effectiveDate = "2020-01-02", mid = "0.124"),
-                HistoricalRate(effectiveDate = "2020-01-03", mid = "0.13"),
-                HistoricalRate(effectiveDate = "2020-01-04", mid = "0.13524"),
-                HistoricalRate(effectiveDate = "2020-01-05", mid = "0.135"),
+                HistoricalRate(effectiveDate = "2020-01-01", mid = 0.123),
+                HistoricalRate(effectiveDate = "2020-01-02", mid = 0.124),
+                HistoricalRate(effectiveDate = "2020-01-03", mid = 0.13),
+                HistoricalRate(effectiveDate = "2020-01-04", mid = 0.13524),
+                HistoricalRate(effectiveDate = "2020-01-05", mid = 0.135),
             )
         ),
         stateStateFlow = MutableStateFlow(ViewModelState.LOADED),

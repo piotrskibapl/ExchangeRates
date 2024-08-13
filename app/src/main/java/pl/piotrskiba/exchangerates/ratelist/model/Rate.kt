@@ -9,8 +9,11 @@ data class Rate(
     val table: Table,
     val currency: String,
     val code: String,
-    val mid: String,
-) : Serializable
+    val mid: Double,
+) : Serializable {
+
+    val midText = mid.toBigDecimal().toPlainString()
+}
 
 fun List<RateTableModel>.toRates() =
     map { it.toRates() }.flatten()
@@ -23,5 +26,5 @@ private fun RateModel.toUi(tableModel: TableModel) =
         table = tableModel.toUi(),
         currency = currency,
         code = code,
-        mid = mid.toBigDecimal().toPlainString(),
+        mid = mid,
     )

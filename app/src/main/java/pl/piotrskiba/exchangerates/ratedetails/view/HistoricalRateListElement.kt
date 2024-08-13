@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import pl.piotrskiba.exchangerates.ratedetails.model.HistoricalRate
 
 @Composable
-fun HistoricalRateListElement(historicalRate: HistoricalRate) {
+fun HistoricalRateListElement(historicalRate: HistoricalRate, referenceRateMid: Double) {
     Surface {
         Column(modifier = Modifier.padding(horizontal = 8.dp)) {
             Row(
@@ -30,8 +30,9 @@ fun HistoricalRateListElement(historicalRate: HistoricalRate) {
                     style = MaterialTheme.typography.bodySmall,
                 )
                 Text(
-                    text = historicalRate.mid,
+                    text = historicalRate.midText,
                     style = MaterialTheme.typography.bodySmall,
+                    color = historicalRate.midTextColor(referenceRateMid),
                 )
             }
             HorizontalDivider()
@@ -45,7 +46,8 @@ fun HistoricalRateListElementPreview() {
     HistoricalRateListElement(
         historicalRate = HistoricalRate(
             effectiveDate = "2020-01-01",
-            mid = "0.123456789",
+            mid = 0.123456789,
         ),
+        referenceRateMid = 0.123456789,
     )
 }
