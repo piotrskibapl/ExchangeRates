@@ -8,10 +8,10 @@ import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
 import pl.piotrskiba.exchangerates.domain.currency.repository.CurrencyRepository
 
-class GetCurrencyRatesUseCaseTest {
+class GetCurrencyRateTablesUseCaseTest {
 
     val currencyRepository: CurrencyRepository = mockk()
-    val tested = GetCurrencyRatesUseCase(currencyRepository)
+    val tested = GetCurrencyRateTablesUseCase(currencyRepository)
 
     @Test
     fun `SHOULD return list of tables A and B`() {

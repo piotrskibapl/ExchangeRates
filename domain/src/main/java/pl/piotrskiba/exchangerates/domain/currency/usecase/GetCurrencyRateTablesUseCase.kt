@@ -5,7 +5,7 @@ import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
 import pl.piotrskiba.exchangerates.domain.currency.repository.CurrencyRepository
 import javax.inject.Inject
 
-class GetCurrencyRatesUseCase @Inject constructor(
+class GetCurrencyRateTablesUseCase @Inject constructor(
     private val currencyRepository: CurrencyRepository,
 ) {
 

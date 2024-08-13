@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 import pl.piotrskiba.exchangerates.base.rx.TestSchedulersFacade
 import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
 import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
-import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRatesUseCase
+import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRateTablesUseCase
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.toRates
 import pl.piotrskiba.exchangerates.ratelist.nav.RateListNavigator
@@ -22,15 +22,15 @@ import pl.piotrskiba.exchangerates.ratelist.viewmodel.RateListViewModel
 
 class RateListViewModelTest {
 
-    val getCurrencyRatesUseCase: GetCurrencyRatesUseCase = mockk()
+    val getCurrencyRateTablesUseCase: GetCurrencyRateTablesUseCase = mockk()
     val tested = RateListViewModel(
-        getCurrencyRatesUseCase = getCurrencyRatesUseCase,
+        getCurrencyRateTablesUseCase = getCurrencyRateTablesUseCase,
         facade = TestSchedulersFacade(),
     )
 
     @Test
     fun `SHOULD set state to Loading WHEN loadRateList called`() {
-        every { getCurrencyRatesUseCase.execute() } returns Single.never()
+        every { getCurrencyRateTablesUseCase.execute() } returns Single.never()
         tested.state.value shouldNotBeEqualTo ViewModelState.LOADING
 
         tested.loadRateList()
@@ -45,7 +45,7 @@ class RateListViewModelTest {
             val rateTableModels: List<RateTableModel> = mockk {
                 every { toRates() } returns rates
             }
-            every { getCurrencyRatesUseCase.execute() } returns Single.just(rateTableModels)
+            every { getCurrencyRateTablesUseCase.execute() } returns Single.just(rateTableModels)
 
             tested.loadRateList()
 
@@ -58,7 +58,7 @@ class RateListViewModelTest {
 
     @Test
     fun `SHOULD set rateList and update state WHEN loadRateList called AND loading fails`() {
-        every { getCurrencyRatesUseCase.execute() } returns Single.error(Throwable())
+        every { getCurrencyRateTablesUseCase.execute() } returns Single.error(Throwable())
 
         tested.loadRateList()
 
@@ -69,13 +69,13 @@ class RateListViewModelTest {
     }
 
     @Test
-    fun `SHOULD call getCurrencyRatesUseCas only once WHEN loadRateList called twice`() {
-        every { getCurrencyRatesUseCase.execute() } returns Single.never()
+    fun `SHOULD call getCurrencyRateTablesUseCase only once WHEN loadRateList called twice`() {
+        every { getCurrencyRateTablesUseCase.execute() } returns Single.never()
 
         tested.loadRateList()
         tested.loadRateList()
 
-        verify(exactly = 1) { getCurrencyRatesUseCase.execute() }
+        verify(exactly = 1) { getCurrencyRateTablesUseCase.execute() }
     }
 
     @Test

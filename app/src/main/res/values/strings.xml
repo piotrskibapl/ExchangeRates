@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ExchangeRates</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_rate_details">RateDetailsActivity</string>
+    <string name="title_activity_rate_list">Exchange Rates</string>
+    <string name="title_activity_rate_details">Exchange Rate Details</string>
 </resources>

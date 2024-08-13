@@ -36,7 +36,7 @@ fun RateListView(
     val state by stateStateFlow.collectAsState()
     ExchangeRatesTheme {
         Column(modifier = Modifier.fillMaxSize()) {
-            TopAppBar(title = { Text(stringResource(R.string.title_activity_main)) })
+            TopAppBar(title = { Text(stringResource(R.string.title_activity_rate_list)) })
             LoadingIndicator(
                 modifier = Modifier
                     .padding(top = 80.dp)

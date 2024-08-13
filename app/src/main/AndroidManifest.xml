@@ -20,7 +20,7 @@
         <activity
             android:name=".ratelist.view.RateListActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"
+            android:label="@string/title_activity_rate_list"
             android:theme="@style/Theme.ExchangeRates">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

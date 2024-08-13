@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import pl.piotrskiba.exchangerates.base.rx.SchedulersProvider
 import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
-import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRatesUseCase
+import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRateTablesUseCase
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
 import pl.piotrskiba.exchangerates.ratelist.model.toRates
 import pl.piotrskiba.exchangerates.ratelist.nav.RateListNavigator
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RateListViewModel @Inject constructor(
-    private val getCurrencyRatesUseCase: GetCurrencyRatesUseCase,
+    private val getCurrencyRateTablesUseCase: GetCurrencyRateTablesUseCase,
     private val facade: SchedulersProvider,
 ) : ViewModel() {
 
@@ -27,11 +27,16 @@ class RateListViewModel @Inject constructor(
     val state: StateFlow<ViewModelState> = _state.asStateFlow()
     lateinit var navigator: RateListNavigator
 
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
+    }
+
     fun loadRateList() {
         if (_state.value == ViewModelState.NOT_INITIALIZED) {
             _state.value = ViewModelState.LOADING
             disposables.add(
-                getCurrencyRatesUseCase.execute()
+                getCurrencyRateTablesUseCase.execute()
                     .subscribeOn(facade.io())
                     .observeOn(facade.ui())
                     .subscribe(
@@ -46,11 +51,6 @@ class RateListViewModel @Inject constructor(
                     )
             )
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposables.clear()
     }
 
     fun onRateClick(rate: Rate) {

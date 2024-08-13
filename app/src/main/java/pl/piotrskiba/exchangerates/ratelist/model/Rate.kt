@@ -12,7 +12,7 @@ data class Rate(
     val mid: Double,
 ) : Serializable {
 
-    val midText = mid.toBigDecimal().toPlainString()
+    val midText: String = mid.toBigDecimal().toPlainString()
 }
 
 fun List<RateTableModel>.toRates() =

@@ -11,7 +11,7 @@ data class HistoricalRate(
     val mid: Double,
 ) {
 
-    val midText = mid.toBigDecimal().toPlainString()
+    val midText: String = mid.toBigDecimal().toPlainString()
 
     fun midTextColor(referenceRateMid: Double) =
         if (abs(referenceRateMid - mid) > referenceRateMid * 0.1) {
