@@ -11,10 +11,10 @@ import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 import pl.piotrskiba.exchangerates.base.rx.TestSchedulersFacade
 import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
-import pl.piotrskiba.exchangerates.domain.currency.model.RateModel
+import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
 import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRatesUseCase
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
-import pl.piotrskiba.exchangerates.ratelist.model.toUi
+import pl.piotrskiba.exchangerates.ratelist.model.toRates
 import pl.piotrskiba.exchangerates.ratelist.viewmodel.RateListViewModel
 
 class RateListViewModelTest {
@@ -37,12 +37,12 @@ class RateListViewModelTest {
 
     @Test
     fun `SHOULD set rateList and update state WHEN loadRateList called AND loading succeeds`() {
-        mockkStatic(List<RateModel>::toUi) {
+        mockkStatic(List<RateTableModel>::toRates) {
             val rates: List<Rate> = mockk(relaxed = true)
-            val rateModels: List<RateModel> = mockk {
-                every { toUi() } returns rates
+            val rateTableModels: List<RateTableModel> = mockk {
+                every { toRates() } returns rates
             }
-            every { getCurrencyRatesUseCase.execute() } returns Single.just(rateModels)
+            every { getCurrencyRatesUseCase.execute() } returns Single.just(rateTableModels)
 
             tested.loadRateList()
 

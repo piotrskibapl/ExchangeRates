@@ -10,7 +10,7 @@ import pl.piotrskiba.exchangerates.base.rx.SchedulersProvider
 import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
 import pl.piotrskiba.exchangerates.domain.currency.usecase.GetCurrencyRatesUseCase
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
-import pl.piotrskiba.exchangerates.ratelist.model.toUi
+import pl.piotrskiba.exchangerates.ratelist.model.toRates
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,7 +34,7 @@ class RateListViewModel @Inject constructor(
                     .observeOn(facade.ui())
                     .subscribe(
                         {
-                            _rateList.value = it.toUi()
+                            _rateList.value = it.toRates()
                             _state.value = ViewModelState.LOADED
                         },
                         {

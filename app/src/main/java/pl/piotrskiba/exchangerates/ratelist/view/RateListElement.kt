@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
+import pl.piotrskiba.exchangerates.ratelist.model.Table
 
 @Composable
 fun RateListElement(rate: Rate) {
@@ -47,6 +48,7 @@ fun RateListElement(rate: Rate) {
 fun RateListElementPreview() {
     RateListElement(
         Rate(
+            table = Table.A,
             currency = "Polish Zloty",
             code = "PLN",
             mid = "0.123456789",

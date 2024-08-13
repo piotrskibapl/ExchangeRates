@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import pl.piotrskiba.exchangerates.R
 import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
+import pl.piotrskiba.exchangerates.ratelist.model.Table
 import pl.piotrskiba.exchangerates.ui.theme.ExchangeRatesTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,10 +56,10 @@ fun RateListViewPreview() {
     RateListView(
         ratesStateFlow = MutableStateFlow(
             listOf(
-                Rate(currency = "Polish Zloty", code = "PLN", mid = "0.123"),
-                Rate(currency = "Euro", code = "EUR", mid = "0.456"),
-                Rate(currency = "Canadian dollar", code = "CAD", mid = "0.789"),
-                Rate(currency = "Lao kip", code = "LAK", mid = "0.123456789"),
+                Rate(table = Table.A, currency = "Polish Zloty", code = "PLN", mid = "0.123"),
+                Rate(table = Table.A, currency = "Euro", code = "EUR", mid = "0.456"),
+                Rate(table = Table.A, currency = "Canadian dollar", code = "CAD", mid = "0.789"),
+                Rate(table = Table.A, currency = "Lao kip", code = "LAK", mid = "0.123456789"),
             )
         ),
         stateStateFlow = MutableStateFlow(ViewModelState.LOADED)

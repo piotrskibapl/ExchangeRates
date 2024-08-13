@@ -1,40 +1,46 @@
 package pl.piotrskiba.exchangerates.model
 
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.mockkStatic
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import pl.piotrskiba.exchangerates.domain.currency.model.RateModel
+import pl.piotrskiba.exchangerates.domain.currency.model.RateTableModel
+import pl.piotrskiba.exchangerates.domain.currency.model.TableModel
 import pl.piotrskiba.exchangerates.ratelist.model.Rate
-import pl.piotrskiba.exchangerates.ratelist.model.toUi
+import pl.piotrskiba.exchangerates.ratelist.model.Table
+import pl.piotrskiba.exchangerates.ratelist.model.toRates
 
 class RateTest {
 
     @Test
-    fun `SHOULD map domain model to ui`() {
-        val tested = RateModel(
-            currency = "Polish Zloty",
-            code = "PLN",
-            mid = 0.00000123456789,
+    fun `SHOULD map list of rate table models to rates`() {
+        val tested = listOf(
+            RateTableModel(
+                table = TableModel.A,
+                rates = listOf(
+                    RateModel(currency = "Polish Zloty", code = "PLN", mid = 0.00000123456789),
+                )
+            ),
+            RateTableModel(
+                table = TableModel.B,
+                rates = listOf(
+                    RateModel(currency = "euro", code = "EUR", mid = 0.123),
+                )
+            ),
         )
 
-        tested.toUi() shouldBeEqualTo Rate(
-            currency = "Polish Zloty",
-            code = "PLN",
-            mid = "0.00000123456789",
+        tested.toRates() shouldBeEqualTo listOf(
+            Rate(
+                table = Table.A,
+                currency = "Polish Zloty",
+                code = "PLN",
+                mid = "0.00000123456789",
+            ),
+            Rate(
+                table = Table.B,
+                currency = "euro",
+                code = "EUR",
+                mid = "0.123",
+            ),
         )
-    }
-
-    @Test
-    fun `SHOULD map list of domain models to ui`() {
-        mockkStatic(RateModel::toUi) {
-            val rate: Rate = mockk()
-            val rateModel: RateModel = mockk {
-                every { toUi() } returns rate
-            }
-
-            listOf(rateModel).toUi() shouldBeEqualTo listOf(rate)
-        }
     }
 }

@@ -14,6 +14,6 @@ class GetCurrencyRatesUseCase @Inject constructor(
             currencyRepository.getRateTable(TableModel.A),
             currencyRepository.getRateTable(TableModel.B),
         ) { tableA, tableB ->
-            tableA.rates + tableB.rates
+            listOf(tableA, tableB)
         }
 }
