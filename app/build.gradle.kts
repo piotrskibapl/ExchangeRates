@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
     testImplementation(libs.junit)
     testImplementation(libs.kluent)
     testImplementation(libs.mockk)
