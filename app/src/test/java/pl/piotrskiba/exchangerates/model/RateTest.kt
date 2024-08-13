@@ -16,13 +16,13 @@ class RateTest {
         val tested = RateModel(
             currency = "Polish Zloty",
             code = "PLN",
-            mid = 1.23456789,
+            mid = 0.00000123456789,
         )
 
         tested.toUi() shouldBeEqualTo Rate(
             currency = "Polish Zloty",
             code = "PLN",
-            mid = 1.23456789,
+            mid = "0.00000123456789",
         )
     }
 

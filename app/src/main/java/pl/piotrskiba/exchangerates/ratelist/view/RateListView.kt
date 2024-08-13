@@ -1,0 +1,66 @@
+package pl.piotrskiba.exchangerates.ratelist.view
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import pl.piotrskiba.exchangerates.R
+import pl.piotrskiba.exchangerates.base.viewmodel.ViewModelState
+import pl.piotrskiba.exchangerates.ratelist.model.Rate
+import pl.piotrskiba.exchangerates.ui.theme.ExchangeRatesTheme
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RateListView(ratesStateFlow: StateFlow<List<Rate>>, stateStateFlow: StateFlow<ViewModelState>) {
+    val rates by ratesStateFlow.collectAsState()
+    val state by stateStateFlow.collectAsState()
+    ExchangeRatesTheme {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(title = { Text(stringResource(R.string.title_activity_main)) })
+            if (state == ViewModelState.LOADING) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .padding(top = 80.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
+            } else {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(items = rates) {
+                        RateListElement(it)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RateListViewPreview() {
+    RateListView(
+        ratesStateFlow = MutableStateFlow(
+            listOf(
+                Rate(currency = "Polish Zloty", code = "PLN", mid = "0.123"),
+                Rate(currency = "Euro", code = "EUR", mid = "0.456"),
+                Rate(currency = "Canadian dollar", code = "CAD", mid = "0.789"),
+                Rate(currency = "Lao kip", code = "LAK", mid = "0.123456789"),
+            )
+        ),
+        stateStateFlow = MutableStateFlow(ViewModelState.LOADED)
+    )
+}

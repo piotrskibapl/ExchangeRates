@@ -5,14 +5,14 @@ import pl.piotrskiba.exchangerates.domain.currency.model.RateModel
 data class Rate(
     val currency: String,
     val code: String,
-    val mid: Double,
+    val mid: String,
 )
 
 fun RateModel.toUi() =
     Rate(
         currency = currency,
         code = code,
-        mid = mid,
+        mid = mid.toBigDecimal().toPlainString(),
     )
 
 fun List<RateModel>.toUi() =
