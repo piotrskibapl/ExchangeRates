@@ -9,5 +9,5 @@ data class HistoricalRateTableRemote(
 
 fun HistoricalRateTableRemote.toDomain(dateFormat: SimpleDateFormat) =
     HistoricalRateTableModel(
-        rates = rates.map { it.toDomain(dateFormat) },
+        rates = rates.map { it.toDomain(dateFormat, rates.first().mid) },
     )

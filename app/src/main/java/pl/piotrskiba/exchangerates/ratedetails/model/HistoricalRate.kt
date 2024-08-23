@@ -4,22 +4,12 @@ import androidx.compose.ui.graphics.Color
 import pl.piotrskiba.exchangerates.domain.currency.model.HistoricalRateModel
 import pl.piotrskiba.exchangerates.domain.currency.model.HistoricalRateTableModel
 import java.text.SimpleDateFormat
-import kotlin.math.abs
 
 data class HistoricalRate(
     val effectiveDate: String,
-    val mid: Double,
-) {
-
-    val midText: String = mid.toBigDecimal().toPlainString()
-
-    fun midTextColor(referenceRateMid: Double) =
-        if (abs(referenceRateMid - mid) > referenceRateMid * 0.1) {
-            Color.Red
-        } else {
-            Color.Green
-        }
-}
+    val mid: String,
+    val midColor: Color,
+)
 
 fun HistoricalRateTableModel.toHistoricalRates(dateFormat: SimpleDateFormat) =
     rates.map { it.toUi(dateFormat) }
@@ -27,5 +17,6 @@ fun HistoricalRateTableModel.toHistoricalRates(dateFormat: SimpleDateFormat) =
 private fun HistoricalRateModel.toUi(dateFormat: SimpleDateFormat) =
     HistoricalRate(
         effectiveDate = dateFormat.format(effectiveDate),
-        mid = mid,
+        mid = mid.toBigDecimal().toPlainString(),
+        midColor = if (isAnomalous) Color.Red else Color.Green
     )

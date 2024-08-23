@@ -27,12 +27,20 @@ class HistoricalRateTableRemoteTest {
     @Test
     fun `SHOULD map remote object to domain`() {
         val dateFormat: SimpleDateFormat = mockk()
-        val domainRate: HistoricalRateModel = mockk()
-        val remoteRate: HistoricalRateRemote = mockk {
-            every { toDomain(dateFormat) } returns domainRate
+        val domainRate1: HistoricalRateModel = mockk()
+        val domainRate2: HistoricalRateModel = mockk()
+        val domainRates = listOf(domainRate1, domainRate2)
+        val remoteRate1: HistoricalRateRemote = mockk {
+            every { mid } returns 1.0
+            every { toDomain(dateFormat, 1.0) } returns domainRate1
         }
-        val tested = HistoricalRateTableRemote(rates = listOf(remoteRate))
+        val remoteRate2: HistoricalRateRemote = mockk {
+            every { mid } returns 2.0
+            every { toDomain(dateFormat, 1.0) } returns domainRate2
+        }
+        val remoteRates = listOf(remoteRate1, remoteRate2)
+        val tested = HistoricalRateTableRemote(remoteRates)
 
-        tested.toDomain(dateFormat) shouldBeEqualTo HistoricalRateTableModel(rates = listOf(domainRate))
+        tested.toDomain(dateFormat) shouldBeEqualTo HistoricalRateTableModel(rates = domainRates)
     }
 }

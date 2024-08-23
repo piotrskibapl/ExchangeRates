@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,7 +49,7 @@ fun RateDetailsView(
             ) {
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = historicalRates) {
-                        HistoricalRateListElement(historicalRate = it, referenceRateMid = rate.mid)
+                        HistoricalRateListElement(historicalRate = it)
                     }
                 }
             }
@@ -68,11 +69,11 @@ fun RateDetailsViewPreview() {
         ),
         historicalRatesStateFlow = MutableStateFlow(
             listOf(
-                HistoricalRate(effectiveDate = "2020-01-01", mid = 0.123),
-                HistoricalRate(effectiveDate = "2020-01-02", mid = 0.124),
-                HistoricalRate(effectiveDate = "2020-01-03", mid = 0.13),
-                HistoricalRate(effectiveDate = "2020-01-04", mid = 0.13524),
-                HistoricalRate(effectiveDate = "2020-01-05", mid = 0.135),
+                HistoricalRate(effectiveDate = "2020-01-01", mid = "0.123", midColor = Color.Green),
+                HistoricalRate(effectiveDate = "2020-01-02", mid = "0.124", midColor = Color.Green),
+                HistoricalRate(effectiveDate = "2020-01-03", mid = "0.13", midColor = Color.Green),
+                HistoricalRate(effectiveDate = "2020-01-04", mid = "0.13524", midColor = Color.Green),
+                HistoricalRate(effectiveDate = "2020-01-05", mid = "0.335", midColor = Color.Red),
             )
         ),
         stateStateFlow = MutableStateFlow(ViewModelState.LOADED),
